@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "description": "The official Genesys UI styles repository",
   "scripts": {
-    "build:all": "npm run build:css && npm run build:uglify && npm run build:fonts && npm run build:scss",
+    "build:all": "pnpm run build:css && pnpm run build:uglify && pnpm run build:fonts && pnpm run build:scss",
     "build:css": "sass src/scss/styles.scss dist/css/styles.css",
     "build:uglify": "uglifycss dist/css/styles.css > dist/css/styles.min.css",
     "build:fonts": "cp -r src/fonts dist/fonts",
     "build:scss": "cp -r src/scss dist/scss",
     "clean": "rm -rf dist",
-    "build": "npm run clean && npm run build:all",
+    "build": "pnpm run clean && pnpm run build:all",
     "release:ci": "release-it --ci",
     "release": "release-it --dry-run"
   },
