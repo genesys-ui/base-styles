@@ -1,15 +1,15 @@
 {
-  "name": "@devoinc/genesys-base-styles",
-  "version": "2.1.0",
-  "description": "The official Genesys styles repository.",
+  "name": "@genesys-ui/base-styles",
+  "version": "0.1.0",
+  "description": "The official Genesys UI styles repository",
   "scripts": {
-    "build": "npm run build:css && npm run build:uglify && npm run build:fonts && npm run build:scss",
+    "build:all": "npm run build:css && npm run build:uglify && npm run build:fonts && npm run build:scss",
     "build:css": "sass src/scss/styles.scss dist/css/styles.css",
     "build:uglify": "uglifycss dist/css/styles.css > dist/css/styles.min.css",
     "build:fonts": "cp -r src/fonts dist/fonts",
     "build:scss": "cp -r src/scss dist/scss",
     "clean": "rm -rf dist",
-    "dist": "npm run clean && npm run build",
+    "build": "npm run clean && npm run build:all",
     "release:ci": "release-it --ci",
     "release": "release-it --dry-run"
   },
@@ -21,18 +21,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:DevoInc/genesys-base-styles.git"
+    "url": "git@github.com:genesys-ui/base-styles.git"
   },
-  "author": "Devo Inc.",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@release-it/conventional-changelog": "^10.0.1",
     "release-it": "^19.0.4",
     "sass": "^1.90.0",
     "uglifycss": "^0.0.29"
-  },
-  "engines": {
-    "node": ">=18",
-    "npm": ">=8"
   }
 }
