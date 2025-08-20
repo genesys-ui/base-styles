@@ -31,4 +31,4 @@ jobs:
     needs: [build]
     with:
       version: ${{ github.event.inputs.version }}
-      dry: ${{ github.event.inputs.dry }}
+      dry: ${{ github.event.inputs.dry == 'true' }}
