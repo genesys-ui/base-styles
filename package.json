@@ -10,8 +10,7 @@
     "build:scss": "cp -r src/scss dist/scss",
     "clean": "rm -rf dist",
     "build": "pnpm run clean && pnpm run build:all",
-    "release:ci": "release-it --ci",
-    "release": "release-it --dry-run"
+    "release": "release-it"
   },
   "files": [
     "dist"
