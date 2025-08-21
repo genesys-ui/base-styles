@@ -23,10 +23,32 @@ run-name: release ${{ github.event.inputs.version }}${{ github.event.inputs.dry 
 jobs:
   build:
     uses: genesys-ui/gh-workflows/.github/workflows/build.yml@main
+  # release:
+  #   uses: genesys-ui/gh-workflows/.github/workflows/release.yml@main
+  #   needs: [build]
+  #   with:
+  #     version: ${{ github.event.inputs.version }}
+  #     dry: ${{ github.event.inputs.dry == 'true' }}
+  #   secrets: inherit
   release:
-    uses: genesys-ui/gh-workflows/.github/workflows/release.yml@main
-    needs: [build]
-    with:
-      version: ${{ github.event.inputs.version }}
-      dry: ${{ github.event.inputs.dry == 'true' }}
-    secrets: inherit
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - uses: genesys-ui/gh-workflows/actions/cache@main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: 'pnpm'
+      - run: |
+          git config --global user.name 'Genesys UI GitHub Action'
+          git config --global user.email 'ci@genesys-ui.dev'
+      - name: Publish ${{ github.event.inputs.version }}${{ github.event.inputs.dry == 'true' && ' (--dry-run)' || '' }}
+        run: pnpm run release -- ${{ github.event.inputs.version != 'auto' && inputs.version || '' }}${{ github.event.inputs.dry == 'true' && ' --dry-run' || '' }} --ci
