@@ -48,10 +48,6 @@ jobs:
         with:
           node-version: lts/*
           cache: 'pnpm'
-      # - run: pnpm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+      - run: pnpm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
       - name: Publish ${{ github.event.inputs.version }}${{ github.event.inputs.dry == 'true' && ' (--dry-run)' || '' }}
         run: npx release-it --verbose --increment=${{ github.event.inputs.version }}${{ github.event.inputs.dry == 'true' && ' --dry-run' || '' }} --ci
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-          NPM_CONFIG_PROVENANCE: true
