@@ -1,6 +1,8 @@
 {
   "plugins": {
-    "release-it-pnpm": {},
+    "release-it-pnpm": {
+      "inFile": "CHANGELOG.md"
+    },
     "@release-it/conventional-changelog": {}
   },
   "github": {
