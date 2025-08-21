@@ -1,6 +1,6 @@
 {
   "name": "@genesys-ui/base-styles",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The official Genesys UI styles repository",
   "scripts": {
     "build:all": "pnpm run build:css && pnpm run build:uglify && pnpm run build:fonts && pnpm run build:scss",
