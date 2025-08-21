@@ -32,6 +32,7 @@ jobs:
   #   secrets: inherit
   release:
     runs-on: ubuntu-latest
+    needs: [build]
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -50,5 +51,6 @@ jobs:
       - run: |
           git config --global user.name 'Genesys UI GitHub Action'
           git config --global user.email 'ci@genesys-ui.dev'
+          pnpm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
       - name: Publish ${{ github.event.inputs.version }}${{ github.event.inputs.dry == 'true' && ' (--dry-run)' || '' }}
         run: pnpm run release -- ${{ github.event.inputs.version != 'auto' && inputs.version || '' }}${{ github.event.inputs.dry == 'true' && ' --dry-run' || '' }} --ci
