@@ -9,8 +9,7 @@
     "build:fonts": "cp -r src/fonts dist/fonts",
     "build:scss": "cp -r src/scss dist/scss",
     "clean": "rm -rf dist",
-    "build": "pnpm run clean && pnpm run build:all",
-    "release": "release-it"
+    "build": "pnpm run clean && pnpm run build:all"
   },
   "files": [
     "dist"
